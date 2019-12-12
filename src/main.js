@@ -8,6 +8,7 @@ import path from 'path';
 import { projectInstall } from 'pkg-install';
 import license from 'spdx-license-list/licenses/MIT';
 import { promisify } from 'util';
+import { fileURLToPath } from 'url';
 
 const access = promisify(fs.access);
 const writeFile = promisify(fs.writeFile);
@@ -58,7 +59,7 @@ export async function createProject(options) {
   };
 
   const templateDir = path.resolve(
-    new URL(import.meta.url).pathname,
+    fileURLToPath(import.meta.url),
     '../../templates',
     options.template
   );
